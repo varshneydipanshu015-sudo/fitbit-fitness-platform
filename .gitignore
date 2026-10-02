@@ -1,0 +1,21 @@
+﻿# Dependencies and generated files
+node_modules/
+.next/
+out/
+dist/
+build/
+target/
+
+# Environment files and secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
