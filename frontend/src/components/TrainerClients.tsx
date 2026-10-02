@@ -41,6 +41,7 @@ async function readError(response: Response, fallback: string) {
   }
 }
 
+/** Adds existing fitness users to the signed-in trainer's roster. */
 export default function TrainerClients() {
   const [clients, setClients] = useState<Client[]>([]);
   const [email, setEmail] = useState("");

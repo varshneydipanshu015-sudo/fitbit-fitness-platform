@@ -15,6 +15,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/** Validates recommendation inputs and returns the selected exercises as JSON. */
 @WebServlet("/api/recommendations")
 public class RecommendationServlet extends HttpServlet {
     private static final String FRONTEND_ORIGIN = "http://localhost:3000";

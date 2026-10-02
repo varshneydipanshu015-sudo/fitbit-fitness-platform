@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.Locale;
 import java.util.Optional;
 
+/** Persists fitness-user and trainer accounts and their role-specific profiles. */
 public class UserDAO {
     private static final String INSERT_USER_SQL = """
             INSERT INTO users (full_name, email, password_hash, role, fitness_goal, fitness_level)
@@ -93,6 +94,7 @@ public class UserDAO {
         try (Connection connection = DBConnection.getConnection()) {
             connection.setAutoCommit(false);
             try {
+                // Both rows must exist together because trainer_profiles shares the user ID.
                 int trainerId;
                 try (PreparedStatement statement = connection.prepareStatement(
                         INSERT_TRAINER_SQL,

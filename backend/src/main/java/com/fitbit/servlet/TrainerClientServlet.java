@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Map;
 
+/** Lists and assigns clients using only the trainer identity in the session. */
 @WebServlet("/api/trainer/clients")
 public class TrainerClientServlet extends HttpServlet {
     private static final String FRONTEND_ORIGIN = "http://localhost:3000";

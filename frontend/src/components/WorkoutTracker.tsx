@@ -35,6 +35,7 @@ function formatDate(value: string) {
   });
 }
 
+/** Records personal workout sessions and supports completing in-progress entries. */
 export default function WorkoutTracker() {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
   const [notes, setNotes] = useState("");

@@ -21,6 +21,7 @@ const difficultyLabels: Record<Exercise["difficulty"], string> = {
   ADVANCED: "Advanced",
 };
 
+/** Fetches the exercise catalog and filters it locally for a responsive search. */
 export default function ExerciseLibrary() {
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [query, setQuery] = useState("");

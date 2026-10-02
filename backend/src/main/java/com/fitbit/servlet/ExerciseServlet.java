@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/** Exposes the exercise catalog used by browsing and plan authoring. */
 @WebServlet("/api/exercises")
 public class ExerciseServlet extends HttpServlet {
     private static final String FRONTEND_ORIGIN = "http://localhost:3000";

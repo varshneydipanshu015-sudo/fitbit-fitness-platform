@@ -3,6 +3,7 @@ package com.fitbit.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+/** Immutable progress measurement recorded by a fitness user. */
 public class ProgressEntry {
     private final int progressId;
     private final int userId;

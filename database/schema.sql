@@ -4,6 +4,7 @@ CREATE DATABASE IF NOT EXISTS fitbit_db
 
 USE fitbit_db;
 
+-- Shared identity table; role-specific profile data lives in related tables.
 CREATE TABLE IF NOT EXISTS users (
     user_id INT NOT NULL AUTO_INCREMENT,
     full_name VARCHAR(100) NOT NULL,
@@ -33,6 +34,7 @@ CREATE TABLE IF NOT EXISTS trainer_profiles (
         ON DELETE CASCADE
 ) ENGINE = InnoDB;
 
+-- Reusable movement catalog referenced by workout plans.
 CREATE TABLE IF NOT EXISTS exercises (
     exercise_id INT NOT NULL AUTO_INCREMENT,
     exercise_name VARCHAR(120) NOT NULL,
@@ -44,6 +46,7 @@ CREATE TABLE IF NOT EXISTS exercises (
     UNIQUE KEY uq_exercises_name (exercise_name)
 ) ENGINE = InnoDB;
 
+-- Trainers own plans; ordered exercise prescriptions are stored separately.
 CREATE TABLE IF NOT EXISTS workout_plans (
     plan_id INT NOT NULL AUTO_INCREMENT,
     trainer_id INT NOT NULL,
@@ -81,6 +84,7 @@ CREATE TABLE IF NOT EXISTS workout_plan_exercises (
         ON DELETE RESTRICT
 ) ENGINE = InnoDB;
 
+-- Trainer-client links are restricted to valid trainer profiles and user IDs.
 CREATE TABLE IF NOT EXISTS trainer_clients (
     trainer_id INT NOT NULL,
     client_id INT NOT NULL,
@@ -94,6 +98,7 @@ CREATE TABLE IF NOT EXISTS trainer_clients (
         ON DELETE CASCADE
 ) ENGINE = InnoDB;
 
+-- Personal activity and progress are always associated with the owning user.
 CREATE TABLE IF NOT EXISTS user_workouts (
     workout_id INT NOT NULL AUTO_INCREMENT,
     user_id INT NOT NULL,

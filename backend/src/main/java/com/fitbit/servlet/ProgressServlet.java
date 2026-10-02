@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+/** Provides read/write access to progress entries for the signed-in user. */
 @WebServlet("/api/progress")
 public class ProgressServlet extends HttpServlet {
     private static final String FRONTEND_ORIGIN = "http://localhost:3000";
@@ -106,6 +107,7 @@ public class ProgressServlet extends HttpServlet {
             HttpServletResponse response
     ) throws IOException {
         HttpSession session = request.getSession(false);
+        // All progress DAO calls use the session ID, not an ID supplied in the request.
         if (session == null
                 || !"USER".equals(session.getAttribute("userRole"))
                 || !(session.getAttribute("userId") instanceof Integer userId)

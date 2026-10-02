@@ -1,5 +1,6 @@
 package com.fitbit.model;
 
+/** A member account with personal fitness preferences and workout features. */
 public class FitnessUser extends User {
     private FitnessGoal fitnessGoal;
     private FitnessLevel fitnessLevel;

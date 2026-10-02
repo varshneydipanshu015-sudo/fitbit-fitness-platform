@@ -54,6 +54,7 @@ function isFitnessLevel(value: string): value is FitnessLevel {
   return Object.hasOwn(levelLabels, value);
 }
 
+/** Loads saved preferences, requests suggestions, and optionally starts a session. */
 export default function Recommendations() {
   const router = useRouter();
   const [goal, setGoal] = useState<FitnessGoal>("GENERAL_FITNESS");

@@ -92,6 +92,7 @@ async function readError(response: Response) {
   }
 }
 
+/** Lets fitness users inspect trainer plans and create linked workout sessions. */
 export default function PlanBrowser() {
   const router = useRouter();
   const [plans, setPlans] = useState<WorkoutPlan[]>([]);
@@ -170,6 +171,7 @@ export default function PlanBrowser() {
     setError("");
     setStartingPlanId(plan.planId);
     try {
+      // Starting a plan uses the existing workout endpoint so history stays unified.
       const response = await fetch(`${apiBaseUrl}/api/workouts`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

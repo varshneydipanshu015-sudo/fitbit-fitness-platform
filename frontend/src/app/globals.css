@@ -1038,10 +1038,12 @@ a {
   text-align: right;
 }
 
+/* Trainer-facing plan authoring and shared plan cards. */
 .trainer-plans {
   width: min(100%, 64rem);
 }
 
+/* Client roster layouts for trainer accounts. */
 .trainer-clients {
   width: min(100%, 56rem);
 }

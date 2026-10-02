@@ -20,6 +20,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 
+/** Handles account registration, sign-in, session profile lookup, and logout. */
 @WebServlet(urlPatterns = {
         "/api/auth/register",
         "/api/auth/login",
@@ -52,6 +53,7 @@ public class AuthServlet extends HttpServlet {
         }
 
         try {
+            // Resolve the stored role-specific account before trusting its session identity.
             String role = (String) session.getAttribute("userRole");
             Optional<? extends User> user = "TRAINER".equals(role)
                     ? authService.findTrainerById(userId)
@@ -144,6 +146,7 @@ public class AuthServlet extends HttpServlet {
             return;
         }
 
+        // Fitness preferences belong only to fitness-user accounts, never trainers.
         try {
             ProfileUpdateRequest update = GSON.fromJson(
                     request.getReader(),
@@ -200,6 +203,7 @@ public class AuthServlet extends HttpServlet {
             return;
         }
 
+        // Only user accounts require fitness goal and level fields.
         User user;
         if (registration.role == null || "USER".equalsIgnoreCase(registration.role.trim())) {
             FitnessGoal goal = parseGoal(registration.fitnessGoal);
@@ -244,6 +248,7 @@ public class AuthServlet extends HttpServlet {
 
         HttpSession session = request.getSession(true);
         request.changeSessionId();
+        // Store only the account identity and role; profile data is fetched separately.
         User user = authenticatedUser.get();
         session.setAttribute("userId", user.getUserId());
         session.setAttribute("userRole", user.getRole());

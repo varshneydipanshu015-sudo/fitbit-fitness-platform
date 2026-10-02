@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+/** Lightweight deployment check that does not depend on database availability. */
 @WebServlet("/api/health")
 public class HealthServlet extends HttpServlet {
     @Override

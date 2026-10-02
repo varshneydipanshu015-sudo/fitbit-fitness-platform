@@ -2,6 +2,7 @@ package com.fitbit.service;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+/** Hashes passwords with BCrypt and checks submitted passwords against stored hashes. */
 public class BCryptPasswordHasher implements PasswordHasher {
     private static final int LOG_ROUNDS = 12;
 
@@ -21,6 +22,7 @@ public class BCryptPasswordHasher implements PasswordHasher {
         try {
             return BCrypt.checkpw(password, passwordHash);
         } catch (IllegalArgumentException exception) {
+            // A malformed stored hash must not authenticate as a valid password.
             return false;
         }
     }

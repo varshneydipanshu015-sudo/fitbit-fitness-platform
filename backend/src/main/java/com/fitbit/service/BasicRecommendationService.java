@@ -6,6 +6,7 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
+/** Returns a small, deterministic exercise set based on goal and experience level. */
 public class BasicRecommendationService implements RecommendationService {
     private static final Map<FitnessGoal, List<String>> EXERCISES_BY_GOAL =
             createExercisesByGoal();
@@ -22,6 +23,7 @@ public class BasicRecommendationService implements RecommendationService {
         }
 
         List<String> suitableExercises = EXERCISES_BY_GOAL.get(goal);
+        // More experienced users receive a longer subset of the goal-specific list.
         int exerciseCount = EXERCISE_COUNT_BY_LEVEL.get(level);
         return List.copyOf(suitableExercises.subList(0, exerciseCount));
     }

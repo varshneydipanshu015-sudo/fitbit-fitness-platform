@@ -1,5 +1,6 @@
 package com.fitbit.model;
 
+/** Describes a catalog movement that may be included in a workout plan. */
 public class Exercise {
     private int exerciseId;
     private String exerciseName;

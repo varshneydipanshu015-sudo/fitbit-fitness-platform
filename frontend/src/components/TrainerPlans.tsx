@@ -121,6 +121,7 @@ async function readError(response: Response, fallback: string) {
   }
 }
 
+/** Builds and displays reusable workout plans owned by the signed-in trainer. */
 export default function TrainerPlans() {
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [plans, setPlans] = useState<WorkoutPlan[]>([]);
@@ -264,6 +265,7 @@ export default function TrainerPlans() {
         setIsSaving(false);
         return;
       }
+      // Record success before refreshing; a refresh error must not imply the save failed.
       planCreated = true;
       setPlanName("");
       setDescription("");

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/** Opens MySQL connections using credentials supplied by the Tomcat environment. */
 public final class DBConnection {
     private static final String URL_VARIABLE = "FITBIT_DB_URL";
     private static final String USER_VARIABLE = "FITBIT_DB_USER";
@@ -18,6 +19,7 @@ public final class DBConnection {
         String password = requireEnvironmentVariable(PASSWORD_VARIABLE);
 
         try {
+            // Explicit loading supports the Tomcat deployment's JDBC driver discovery.
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException exception) {
             throw new SQLException("MySQL JDBC driver is not available.", "08001", exception);

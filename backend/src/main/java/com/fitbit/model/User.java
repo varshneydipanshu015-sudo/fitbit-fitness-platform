@@ -1,5 +1,6 @@
 package com.fitbit.model;
 
+/** Shared account identity; subclasses provide the role-specific account type. */
 public abstract class User {
     private int userId;
     private String fullName;

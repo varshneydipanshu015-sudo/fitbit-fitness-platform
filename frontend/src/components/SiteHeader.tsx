@@ -12,6 +12,7 @@ type Profile = {
 const apiBaseUrl =
   process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8080/fitbit-app";
 
+/** Keeps the global navigation in sync with the current authenticated role. */
 export default function SiteHeader() {
   const pathname = usePathname();
   const router = useRouter();
@@ -67,6 +68,7 @@ export default function SiteHeader() {
 
     void loadProfile();
     return () => controller.abort();
+  // Recheck after navigation so login/logout changes are reflected without a reload.
   }, [pathname]);
 
   async function handleSignOut() {

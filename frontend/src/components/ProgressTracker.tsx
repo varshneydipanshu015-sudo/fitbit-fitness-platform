@@ -39,6 +39,7 @@ function formatShortDate(value: string) {
   });
 }
 
+/** Saves progress entries and draws a small SVG trend chart without chart dependencies. */
 export default function ProgressTracker() {
   const [entries, setEntries] = useState<ProgressEntry[]>([]);
   const [weight, setWeight] = useState("");
@@ -49,6 +50,7 @@ export default function ProgressTracker() {
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [reloadCount, setReloadCount] = useState(0);
+  // Reverse the latest ten records so the chart reads left-to-right in date order.
   const chartEntries = entries.slice(0, 10).reverse();
   const chartWeights = chartEntries.map((entry) => entry.weightKg);
   const minimumWeight = Math.min(...chartWeights);
@@ -63,6 +65,7 @@ export default function ProgressTracker() {
   const chartRight = chartWidth - 20;
   const chartTop = 20;
   const chartBottom = chartHeight - 42;
+  // Convert weight and entry position into SVG coordinates inside the chart margins.
   const chartPoints = chartEntries.map((entry, index) => {
     const x =
       chartEntries.length === 1

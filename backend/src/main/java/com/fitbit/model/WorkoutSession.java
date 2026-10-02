@@ -2,6 +2,7 @@ package com.fitbit.model;
 
 import java.time.LocalDateTime;
 
+/** A user's logged workout, optionally associated with a trainer-created plan. */
 public class WorkoutSession {
     private final int workoutId;
     private final int userId;

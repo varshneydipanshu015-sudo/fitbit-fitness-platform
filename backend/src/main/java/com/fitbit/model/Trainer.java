@@ -1,5 +1,6 @@
 package com.fitbit.model;
 
+/** A coach account with optional public-facing biography and specialization. */
 public class Trainer extends User {
     private String bio;
     private String specialization;

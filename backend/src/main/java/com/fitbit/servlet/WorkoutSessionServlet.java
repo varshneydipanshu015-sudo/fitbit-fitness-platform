@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+/** Starts and completes sessions while keeping every operation scoped to its owner. */
 @WebServlet(urlPatterns = {"/api/workouts", "/api/workouts/complete"})
 public class WorkoutSessionServlet extends HttpServlet {
     private static final String FRONTEND_ORIGIN = "http://localhost:3000";
@@ -76,6 +77,7 @@ public class WorkoutSessionServlet extends HttpServlet {
         }
 
         try {
+            // Use the endpoint path to share common session handling for start and complete.
             if (request.getServletPath().endsWith("/complete")) {
                 completeWorkout(request, response, userId);
             } else {

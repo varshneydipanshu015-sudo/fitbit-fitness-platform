@@ -9,8 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+/** Manages client links while only matching accounts with the fitness-user role. */
 public class TrainerClientDAO {
     private static final String ASSIGN_CLIENT_SQL = """
+            -- Resolve the email and enforce the USER role in the same insert.
             INSERT INTO trainer_clients (trainer_id, client_id)
             SELECT tp.trainer_id, u.user_id
             FROM trainer_profiles tp

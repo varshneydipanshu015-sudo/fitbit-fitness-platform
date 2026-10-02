@@ -125,6 +125,7 @@ function workoutsInLastSevenDays(workouts: Workout[]) {
   }).length;
 }
 
+/** Loads the correct dashboard for the role returned by the authenticated profile API. */
 export default function DashboardOverview() {
   const [workouts, setWorkouts] = useState<Workout[]>([]);
   const [progress, setProgress] = useState<ProgressEntry[]>([]);
@@ -193,6 +194,7 @@ export default function DashboardOverview() {
         return;
       }
 
+      // Trainers do not have user workout/progress APIs, so load those only for USER accounts.
       let responses: Response[];
       try {
         responses = await Promise.all([

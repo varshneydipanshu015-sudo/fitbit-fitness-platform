@@ -3,6 +3,7 @@ package com.fitbit.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/** A trainer-authored routine containing an ordered set of exercise prescriptions. */
 public class WorkoutPlan {
     private final int planId;
     private final int trainerId;

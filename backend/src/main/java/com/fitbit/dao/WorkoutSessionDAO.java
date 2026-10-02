@@ -12,6 +12,7 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Persists workout sessions and scopes history/completion to the owning user. */
 public class WorkoutSessionDAO {
     private static final String INSERT_SQL = """
             INSERT INTO user_workouts (user_id, plan_id, notes)
@@ -95,6 +96,7 @@ public class WorkoutSessionDAO {
                 ? null
                 : completedTimestamp.toLocalDateTime();
         int rawPlanId = results.getInt("plan_id");
+        // JDBC returns zero for SQL NULL when reading an int; wasNull preserves optional plans.
         Integer planId = results.wasNull() ? null : rawPlanId;
 
         return new WorkoutSession(

@@ -3,6 +3,7 @@ package com.fitbit.service;
 import com.fitbit.exception.UserValidationException;
 import java.nio.charset.StandardCharsets;
 
+/** Central validation rules shared by fitness-user and trainer registration. */
 public final class UserValidator {
     private static final int MAX_NAME_LENGTH = 100;
     private static final int MAX_EMAIL_LENGTH = 254;
@@ -34,6 +35,7 @@ public final class UserValidator {
             throw new UserValidationException("Password must be at least 8 characters.");
         }
         if (password.getBytes(StandardCharsets.UTF_8).length > MAX_PASSWORD_BYTES) {
+            // BCrypt processes at most 72 input bytes, so reject longer UTF-8 values explicitly.
             throw new UserValidationException(
                     "Password must be 72 UTF-8 bytes or fewer."
             );

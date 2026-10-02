@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/** Creates plans atomically and reads each plan with its ordered exercise details. */
 public class WorkoutPlanDAO {
     private static final int MAX_EXERCISES_PER_PLAN = 30;
     private static final String INSERT_PLAN_SQL = """
@@ -51,6 +52,7 @@ public class WorkoutPlanDAO {
         try (Connection connection = DBConnection.getConnection()) {
             connection.setAutoCommit(false);
             try {
+                // Save the plan and all of its exercises as one transaction.
                 int planId;
                 try (PreparedStatement statement = connection.prepareStatement(
                         INSERT_PLAN_SQL,
@@ -104,6 +106,7 @@ public class WorkoutPlanDAO {
     }
 
     private List<WorkoutPlan> findPlans(String sql, Integer trainerId) throws SQLException {
+        // Group joined exercise rows under their parent plan while preserving SQL ordering.
         Map<Integer, WorkoutPlan> plans = new LinkedHashMap<>();
         try (Connection connection = DBConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {

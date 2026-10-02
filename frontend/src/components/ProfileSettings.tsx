@@ -98,6 +98,7 @@ async function readError(response: Response) {
   }
 }
 
+/** Shows trainer details or lets fitness users edit recommendation preferences. */
 export default function ProfileSettings() {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [trainerProfile, setTrainerProfile] = useState<TrainerProfile | null>(null);

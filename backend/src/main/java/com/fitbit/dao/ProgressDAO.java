@@ -11,6 +11,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Stores each user's dated progress measurements and returns them newest first. */
 public class ProgressDAO {
     private static final String INSERT_SQL = """
             INSERT INTO progress (user_id, recorded_on, weight_kg, note)
@@ -79,6 +80,7 @@ public class ProgressDAO {
     }
 
     private void validateWeight(BigDecimal weightKg) {
+        // Match the precision and range of the database DECIMAL(5, 2) column.
         if (weightKg == null || weightKg.signum() <= 0 || weightKg.compareTo(MAX_WEIGHT_KG) > 0) {
             throw new IllegalArgumentException("Weight must be greater than 0 and at most 999.99 kg.");
         }

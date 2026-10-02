@@ -10,6 +10,7 @@ type Profile = {
 const apiBaseUrl =
   process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8080/fitbit-app";
 
+/** Personalizes the landing page when a valid session is present. */
 export default function HomeWelcome() {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [isCheckingSession, setIsCheckingSession] = useState(true);

@@ -1,5 +1,6 @@
 package com.fitbit.model;
 
+/** Connects a saved exercise to a plan with its order and prescription. */
 public class PlanExercise {
     private final Exercise exercise;
     private final int exerciseOrder;
@@ -14,6 +15,7 @@ public class PlanExercise {
             int repsCount,
             int restSeconds
     ) {
+        // Validate here as well as at the API boundary so all model callers stay safe.
         if (exercise == null) {
             throw new IllegalArgumentException("Exercise is required.");
         }

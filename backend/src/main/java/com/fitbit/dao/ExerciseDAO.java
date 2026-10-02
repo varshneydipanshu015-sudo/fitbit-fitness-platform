@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/** Reads and writes exercise catalog records used by plans and exercise browsing. */
 public class ExerciseDAO {
     private static final String INSERT_SQL = """
             INSERT INTO exercises (exercise_name, description, target_muscle, difficulty, equipment)

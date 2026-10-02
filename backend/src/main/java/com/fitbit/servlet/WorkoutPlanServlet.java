@@ -19,9 +19,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+/** Allows trainers to manage their plans and signed-in users to browse all plans. */
 @WebServlet("/api/plans")
 public class WorkoutPlanServlet extends HttpServlet {
     private static final String FRONTEND_ORIGIN = "http://localhost:3000";
+    // Keep nullable description and exercise fields present for the frontend response validators.
     private static final Gson GSON = new GsonBuilder().serializeNulls().create();
     private final WorkoutPlanDAO workoutPlanDAO = new WorkoutPlanDAO();
 
@@ -55,6 +57,7 @@ public class WorkoutPlanServlet extends HttpServlet {
             return;
         }
         try {
+            // Trainers see only their own plans; fitness users can browse the full catalog.
             response.setStatus(HttpServletResponse.SC_OK);
             GSON.toJson(
                     "TRAINER".equals(session.getAttribute("userRole"))
@@ -135,6 +138,7 @@ public class WorkoutPlanServlet extends HttpServlet {
                         : request.description.trim(),
                 goal
         );
+        // The list position is the canonical order, avoiding caller-supplied gaps or duplicates.
         for (int index = 0; index < request.exercises.size(); index++) {
             PlanExerciseRequest item = request.exercises.get(index);
             if (item == null || item.exerciseId == null || item.setsCount == null

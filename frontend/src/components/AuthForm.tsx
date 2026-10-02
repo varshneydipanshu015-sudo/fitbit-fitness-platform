@@ -17,6 +17,7 @@ type AuthFormProps = {
   mode: AuthMode;
 };
 
+/** Shares the login UI while showing role-specific fields during registration. */
 export default function AuthForm({ mode }: AuthFormProps) {
   const router = useRouter();
   const isRegistration = mode === "register";
@@ -32,6 +33,7 @@ export default function AuthForm({ mode }: AuthFormProps) {
     setIsSubmitting(true);
 
     const formData = new FormData(event.currentTarget);
+    // Keep fitness preferences off trainer requests; they are not required for that role.
     const requestBody = isRegistration
       ? {
           role: accountRole,

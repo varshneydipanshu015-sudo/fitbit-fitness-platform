@@ -10,6 +10,7 @@ import com.fitbit.model.User;
 import java.sql.SQLException;
 import java.util.Optional;
 
+/** Applies account business rules and coordinates password hashing with persistence. */
 public class AuthService {
     private final UserDAO userDAO;
     private final PasswordHasher passwordHasher;
@@ -105,6 +106,8 @@ public class AuthService {
             return Optional.empty();
         }
 
+        // Account tables share an email namespace, but role-specific DAO queries keep
+        // authentication results strongly typed for the session role.
         Optional<FitnessUser> matchingUser = userDAO.findFitnessUserByEmail(email);
         if (matchingUser.isPresent()
                 && passwordHasher.matches(password, matchingUser.get().getPasswordHash())) {
